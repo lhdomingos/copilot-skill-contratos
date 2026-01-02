@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Salvar Documentos de Contrato",
+  "name_for_model": "salvar_documentos_contrato",
+  "description_for_human": "Salva contratos e documentos auxiliares em repositório corporativo.",
+  "description_for_model": "Recebe arquivos de contrato principal e documentos auxiliares e os armazena.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://example.com/openapi.yaml"
+  },
+  "logo_url": "https://raw.githubusercontent.com/github/explore/main/topics/copilot/copilot.png",
+  "contact_email": "suporte@empresa.com",
+  "legal_info_url": "https://www.microsoft.com/legal"
+}
