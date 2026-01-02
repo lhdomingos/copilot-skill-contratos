@@ -1,17 +1,63 @@
+
 {
-  "schema_version": "v1",
-  "name_for_human": "Salvar Documentos de Contrato",
-  "name_for_model": "salvar_documentos_contrato",
-  "description_for_human": "Salva contratos e documentos auxiliares em repositório corporativo.",
-  "description_for_model": "Recebe arquivos de contrato principal e documentos auxiliares e os armazena.",
-  "auth": {
-    "type": "none"
-  },
-  "api": {
-    "type": "openapi",
-    "url": "https://example.com/openapi.yaml"
-  },
-  "logo_url": "https://raw.githubusercontent.com/github/explore/main/topics/copilot/copilot.png",
-  "contact_email": "suporte@empresa.com",
-  "legal_info_url": "https://www.microsoft.com/legal"
+  "schema": "1.0",
+  "name": "SalvarArquivosSkill",
+  "version": "1.0.0",
+  "description": "Recebe arquivos em base64, salva no SharePoint e retorna URLs.",
+  "actions": [
+    {
+      "name": "salvarArquivos",
+      "description": "Salva contrato principal e auxiliares no SharePoint.",
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "processoId": { "type": "string" },
+          "contratoPrincipal": {
+            "type": "object",
+            "properties": {
+              "fileName": { "type": "string" },
+              "contentBase64": { "type": "string" },
+              "mimeType": { "type": "string" }
+            },
+            "required": ["fileName", "contentBase64"]
+          },
+          "auxiliares": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fileName": { "type": "string" },
+                "contentBase64": { "type": "string" },
+                "mimeType": { "type": "string" }
+              },
+              "required": ["fileName", "contentBase64"]
+            }
+          }
+        },
+        "required": ["processoId", "contratoPrincipal"]
+      },
+      "outputs": {
+        "type": "object",
+        "properties": {
+          "ok": { "type": "boolean" },
+          "idProcesso": { "type": "string" },
+          "urlContratoPrincipal": { "type": "string" },
+          "urlsAuxiliares": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "execution": {
+        "type": "http",
+        "method": "POST",
+        "url": "https://default0cd7692aa4144ae7b804bcb5db4db6.e3.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/e9ad4be57bd940f491ecc788fb8f6f30/triggers/manual/paths/invoke?api-version=1",
+        "authentication": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header"
+        }
+      }
+    }
+  ]
 }
